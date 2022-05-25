@@ -15,6 +15,8 @@
     <meta name="theme-color" content="#ffffff">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('css_system/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css_system/dataTables.bootstrap5.min.css') }}">
     <!-- Sweet Alert -->
     <link type="text/css" href="{{ asset('/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
     <!-- Notyf -->
@@ -24,7 +26,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
     @yield('styles')
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/plupload/3.1.2/jquery.plupload.queue/css/jquery.plupload.queue.css">
     {{-- Notiflix --}}
@@ -668,6 +669,11 @@
             </div>
         </footer> --}}
     </main>
+    {{-- JQUERY --}}
+    <script src="{{ asset('/js_system/jquery-3.5.1.js') }}"></script>
+    {{-- DATATABLES --}}
+    <script src="{{ asset('js_system/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js_system/dataTables.bootstrap5.min.js') }}"></script>
     <!-- Core -->
     <script src="{{ asset('/vendor/@popperjs/core/dist/umd/popper.min.js') }}"></script>
     <script src="{{ asset('/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -687,8 +693,6 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Volt JS -->
     <script src="{{ asset('/assets/js/volt.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/plupload/3.1.2/plupload.full.min.js">
     </script>

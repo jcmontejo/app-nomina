@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Security\Catalogs\CatBranch;
+use App\Models\Security\Catalogs\CatTypeUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -54,4 +56,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(CatBranch::class,'dblCatBranch','dblCatBranch');
+    }
+
+    public function type_user(): BelongsTo
+    {
+        return $this->belongsTo(CatTypeUser::class,'dblCatTypeUser','dblCatTypeUser');
+    }
 }

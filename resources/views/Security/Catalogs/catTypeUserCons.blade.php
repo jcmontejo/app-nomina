@@ -25,7 +25,7 @@
                     {{ $message }}
                 </div>
             @endif
-            <table id="tblTypeUser" class="table table-bordered table-hover table-sm">
+            <table id="tbl" class="table table-bordered table-hover table-sm">
                 <thead>
                     <tr>
                         <th class="fit-column thColor">Acciones</th>
@@ -128,21 +128,9 @@
         }
 
     </style>
-
-    <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.0.0/css/fixedColumns.dataTables.min.css">
 @endsection
 {{-- Scripts Section --}}
 @section('scripts')
-    <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.2.7/js/dataTables.rowReorder.min.js">
-    </script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/plupload/3.1.2/plupload.full.min.js">
-    </script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/plupload/3.1.2/jquery.plupload.queue/jquery.plupload.queue.js"></script>-->
-    <script src="https://cdn.datatables.net/fixedcolumns/4.0.0/js/dataTables.fixedColumns.min.js"></script>
     <script>
         _table = [];
         $(document).ready(function() {
@@ -151,14 +139,14 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            // initDatatables();
+            initDatatables();
             $(this).on('click','.delete',Delete);
         });
     </script>
     {{-- -Scripts Default --}}
     <script>
         function initDatatables() {
-            _table = $("#tblTypeUser").DataTable({
+            _table = $("#tbl").DataTable({
                 "dom": '<"row"<"text-left col-4"f><"text-right col-8">>lt<"bottom"i><"clear">',
                 "language": {
                     search: '<i class="fa fa-filter" aria-hidden="true"></i>',
@@ -167,14 +155,6 @@
                 scrollY: '60vh',
                 scrollX: '1140px',
                 "bPaginate": false,
-                "columns": [{
-                        "class": "text-center",
-                        "width": "1px"
-                    },
-                    {
-                        className: "tdProcess"
-                    },
-                ],
             });
         }
 

@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('strPasswordText')->nullable();
             $table->bigInteger('dblCatTypeUser')->nullable();
             $table->foreign('dblCatTypeUser')->references('dblCatTypeUser')->on('tblCatTypeUser');
+            $table->bigInteger('dblCatBranch')->nullable();
+            $table->foreign('dblCatBranch')->references('dblCatBranch')->on('tblCatBranch');
             $table->rememberToken();
             $table->timestamps();
         });

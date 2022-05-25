@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Security\Catalogs;
 
 use App\Http\Controllers\Controller;
+use App\Models\Security\Catalogs\CatBranch;
+use App\Models\Security\Catalogs\CatTypeUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +31,9 @@ class UserController extends Controller
         $page_title = 'Create User';
         $message = $request->session()->get('message');
         $obj = new User();
-        return view('Security.Catalogs.catUser', compact('page_title', 'obj'));
+        $branchs = CatBranch::all();
+        $type_users = CatTypeUser::all();
+        return view('Security.Catalogs.catUser', compact('page_title', 'obj', 'branchs', 'type_users'));
     }
 
     public function store(Request $request)
@@ -45,6 +49,8 @@ class UserController extends Controller
         $obj->strAddres = $request->input("strAddres");
         $obj->intPhoneNumber = $request->input("intPhoneNumber");
         $obj->email = $request->input("email");
+        $obj->dblCatTypeUser = $request->dblCatTypeUser;
+        $obj->dblCatBranch = $request->dblCatBranch;
         $obj->password = Hash::make($psd);
         $obj->strPasswordText = $psd;
         $obj->save();
@@ -59,7 +65,9 @@ class UserController extends Controller
         $page_title = 'Editar Centro de Trabajo';
         $method = $request->method();
         $obj = User::findOrFail($id);
-        return view('Security.Catalogs.catUser', compact('page_title', 'obj'));
+        $branchs = CatBranch::all();
+        $type_users = CatTypeUser::all();
+        return view('Security.Catalogs.catUser', compact('page_title', 'obj', 'branchs', 'type_users'));
     }
 
     public function update(Request $request)
@@ -75,6 +83,8 @@ class UserController extends Controller
         $obj->strAddres = $request->input("strAddres");
         $obj->intPhoneNumber = $request->input("intPhoneNumber");
         $obj->email = $request->input("email");
+        $obj->dblCatTypeUser = $request->dblCatTypeUser;
+        $obj->dblCatBranch = $request->dblCatBranch;
         $obj->save();
         $request->session()->flash('message', 'The record has been updated!');
         return redirect()->route('user.index');

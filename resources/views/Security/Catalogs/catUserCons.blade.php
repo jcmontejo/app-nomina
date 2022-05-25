@@ -25,44 +25,54 @@
                     {{ $message }}
                 </div>
             @endif
-            <table id="tbl" class="table table-bordered table-hover table-sm">
-                <thead>
-                    <tr>
-                        <th class="fit-column thColor">Acciones</th>
-                        <th class="fit-column thColor">Nombre</th>
-                        <th class="fit-column thColor">Teléfono</th>
-                        <th class="fit-column thColor">Correo Electrónico</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($objs as $item)
+            <div class="table-responsive">
+                <table id="tbl" class="table table-bordered table-hover table-sm">
+                    <thead>
                         <tr>
-                            <td class="text-center">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-clean btn-icon mr-2" type="button"
-                                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item"
-                                                href="/users/users/{{ $item->id }}/edit"><i
-                                                    class="far fa-edit icon-nm btn btn-icon btn-primary btn-xs mr-1"></i>
-                                                <span class="navi-text">Editar</span></a>
-                                        </li>
-                                        <li class="delete" value="{{ $item->id }}"><a class="dropdown-item"><i
-                                                    class="far fa-trash-alt icon-nm btn btn-icon btn-danger btn-xs mr-1"></i>
-                                                <span class="navi-text">Eliminar</span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td style='text-align:left'>{{ $item->name }}</td>
-                            <td style='text-align:left'>{{ $item->email }}</td>
-                            <td style='text-align:left'>{{ $item->email }}</td>
+                            <th class="fit-column thColor">Acciones</th>
+                            <th class="fit-column thColor">Tipo de Usuario</th>
+                            <th class="fit-column thColor">Nombre</th>
+                            <th class="fit-column thColor">Apellidos</th>
+                            <th class="fit-column thColor">Teléfono</th>
+                            <th class="fit-column thColor">Correo Electrónico</th>
+                            <th class="fit-column thColor">Dirección</th>
+                            <th class="fit-column thColor">Centro de Trabajo</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($objs as $item)
+                            <tr>
+                                <td class="text-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-clean btn-icon mr-2" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="/users/users/{{ $item->id }}/edit"><i
+                                                        class="far fa-edit icon-nm btn btn-icon btn-primary btn-xs mr-1"></i>
+                                                    <span class="navi-text">Editar</span></a>
+                                            </li>
+                                            <li class="delete" value="{{ $item->id }}"><a
+                                                    class="dropdown-item"><i
+                                                        class="far fa-trash-alt icon-nm btn btn-icon btn-danger btn-xs mr-1"></i>
+                                                    <span class="navi-text">Eliminar</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td style='text-align:left'>{{ $item->type_user->strTypeUser ?? '' }}</td>
+                                <td style='text-align:left'>{{ $item->name }}</td>
+                                <td style='text-align:left'>{{ $item->strLastName }}</td>
+                                <td style='text-align:left'>{{ $item->intPhoneNumber }}</td>
+                                <td style='text-align:left'>{{ $item->email }}</td>
+                                <td style='text-align:left'>{{ $item->strAddres }}</td>
+                                <td style='text-align:left'>{{ $item->branch->strBranch ?? '' }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection
@@ -116,8 +126,6 @@
             border-collapse: collapse;
         }
 
-
-
         .thColor {
             background-color: #7f7f7f !important;
             color: white !important;
@@ -132,21 +140,9 @@
         }
 
     </style>
-
-    <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.0.0/css/fixedColumns.dataTables.min.css">
 @endsection
 {{-- Scripts Section --}}
 @section('scripts')
-    <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.2.7/js/dataTables.rowReorder.min.js">
-    </script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/plupload/3.1.2/plupload.full.min.js">
-    </script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/plupload/3.1.2/jquery.plupload.queue/jquery.plupload.queue.js"></script>-->
-    <script src="https://cdn.datatables.net/fixedcolumns/4.0.0/js/dataTables.fixedColumns.min.js"></script>
     <script>
         _table = [];
         $(document).ready(function() {
@@ -155,8 +151,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            // initDatatables();
-            $(this).on('click','.delete',Delete);
+            initDatatables();
+            $(this).on('click', '.delete', Delete);
         });
     </script>
     {{-- -Scripts Default --}}
@@ -171,14 +167,6 @@
                 scrollY: '60vh',
                 scrollX: '1140px',
                 "bPaginate": false,
-                "columns": [{
-                        "class": "text-center",
-                        "width": "1px"
-                    },
-                    {
-                        className: "tdProcess"
-                    },
-                ],
             });
         }
 
@@ -206,7 +194,7 @@
                             // reload();
                             Notiflix.Report.Success('Bien hecho', 'Has eliminado un registro.',
                                 'Click');
-                                location.reload();
+                            location.reload();
                         })
                         .fail(function() {
                             Notiflix.Report.Failure('Oooops!', 'Algo salio mal con la petición.',
