@@ -52,7 +52,7 @@ class BranchController extends Controller
         $page_title = 'Editar Centro de Trabajo';
         $method = $request->method();
         $obj = CatBranch::findOrFail($dblCatBranch);
-        return view('Security.Catalogs.CatBranch', compact('page_title', 'obj'));
+        return view('Security.Catalogs.catBranch', compact('page_title', 'obj'));
     }
 
     public function update(Request $request)
