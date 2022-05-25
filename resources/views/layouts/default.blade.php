@@ -672,7 +672,7 @@
     {{-- JQUERY --}}
     <script src="{{ asset('/js_system/jquery-3.5.1.js') }}"></script>
     {{-- DATATABLES --}}
-    <script src="{{ asset('/js_system/jquery.dataTables.min.js') }}"></script>
+    Plain text1<br><script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
     <script src="{{ asset('/js_system/dataTables.bootstrap5.min.js') }}"></script>
     <!-- Core -->
     <script src="{{ asset('/vendor/@popperjs/core/dist/umd/popper.min.js') }}"></script>
